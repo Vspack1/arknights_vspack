@@ -88,3 +88,50 @@ void drawGame(int cursorX, int cursorY) {
                 for (auto &e : enemies) {
                     if (e.x == x && e.y == y) {
                         mvaddch(y, x, 'E');
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+int main() {
+    loadOperators("operator.json");
+    loadMap("map.json");
+
+    int cursorX = 0;
+    int cursorY = 0;
+
+    initscr();
+    cbreak();
+    noecho();
+    keypad(stdscr, TRUE);
+    nodelay(stdscr, TRUE);
+    curs_set(0);
+
+    bool running = true;
+    while (running) {
+        drawGame(cursorX, cursorY);
+        mvprintw(gridH + 1, 0, "Arrows: move | q: quit");
+        refresh();
+
+        int ch = getch();
+        switch (ch) {
+            case KEY_UP:    if (cursorY > 0) cursorY--; break;
+            case KEY_DOWN:  if (cursorY < gridH - 1) cursorY++; break;
+            case KEY_LEFT:  if (cursorX > 0) cursorX--; break;
+            case KEY_RIGHT: if (cursorX < gridW - 1) cursorX++; break;
+            case 'q':
+                running = false;
+                break;
+            default:
+                break;
+        }
+
+        napms(60);
+    }
+
+    endwin();
+    return 0;
+}
