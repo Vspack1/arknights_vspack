@@ -4,7 +4,7 @@ LIBS = -lncurses
 
 all: ark_ncurses
 
-ark_ncurses: main.cpp json.hpp
+ark_ncurses: main.cpp
 	$(CXX) $(CXXFLAGS) main.cpp -o ark_ncurses $(LIBS)
 
 clean:
