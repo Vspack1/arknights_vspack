@@ -73,10 +73,10 @@ void saveMap(const std::string &filename) {
 
 void drawGame(int cursorX, int cursorY) {
     clear();
-    for (int y = 0; y < gridH; y++) {
-        for (int x = 0; x < gridW; x++) {
+    for (int y = 0; y < gridH; ++y) {
+        for (int x = 0; x < gridW; ++x) {
             bool drawn = false;
-            for (auto &t : towers) {
+            for (const auto &t : towers) {
                 if (t.x == x && t.y == y) {
                     mvaddch(y, x, t.op.symbol);
                     drawn = true;
@@ -85,14 +85,25 @@ void drawGame(int cursorX, int cursorY) {
             }
             if (!drawn) {
                 bool enemyHere = false;
-                for (auto &e : enemies) {
+                for (const auto &e : enemies) {
                     if (e.x == x && e.y == y) {
                         mvaddch(y, x, 'E');
-                        }
+                        enemyHere = true;
+                        break;
+                    }
+                }
+                if (!enemyHere) {
+                    if (y >= 0 && y < (int)mapGrid.size() && !mapGrid.empty() && x >= 0 && x < (int)mapGrid[y].size()) {
+                        mvaddch(y, x, mapGrid[y][x]);
+                    } else {
+                        mvaddch(y, x, '.');
                     }
                 }
             }
         }
+    }
+    if (cursorY >= 0 && cursorY < gridH && cursorX >= 0 && cursorX < gridW) {
+        mvaddch(cursorY, cursorX, 'X' | A_BOLD);
     }
 }
 
