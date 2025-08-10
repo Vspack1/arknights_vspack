@@ -1,0 +1,26 @@
+{
+    "Sniper": {
+        "symbol": "S",
+        "cost": 30,
+        "range": 4,
+        "damage": 5,
+        "fireRate": 3,
+        "hp": 15
+    },
+    "Guard": {
+        "symbol": "G",
+        "cost": 25,
+        "range": 2,
+        "damage": 8,
+        "fireRate": 4,
+        "hp": 25
+    },
+    "Caster": {
+        "symbol": "C",
+        "cost": 40,
+        "range": 5,
+        "damage": 10,
+        "fireRate": 5,
+        "hp": 10
+    }
+}
